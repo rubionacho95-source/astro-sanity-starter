@@ -1,36 +1,12 @@
----
-import { marked } from 'marked';
-import { type HeroSection } from 'types';
-import Action from '@components/Action.astro';
-import Section from '@components/Section.astro';
+<section class="bg-black text-white text-center py-24">
+  <h1 class="text-4xl md:text-6xl font-bold mb-4">
+    Hacemos ruido, generamos impacto.
+  </h1>
+  <p class="text-lg text-gray-300 mb-6">
+    Agencia de marketing y comunicación que potencia tu marca.
+  </p>
+  <a href="#servicios" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-300 transition">
+    Descubre más
+  </a>
+</section>
 
-interface Props extends HeroSection {
-    'data-sb-field-path'?: string;
-}
-
-const { heading, body, cta, ...rest } = Astro.props;
----
-
-<Section {...rest} class="text-center">
-    {
-        heading && (
-            <h1 class="text-4xl font-black sm:text-6xl text-balance" data-sb-field-path=".heading">
-                {heading}
-            </h1>
-        )
-    }
-    {body && <div class:list={['mx-auto', heading && 'mt-6', 'max-w-prose markdown']} data-sb-field-path=".body" set:html={marked.parse(body)} />}
-    {
-        cta && cta.length > 0 && (
-            <div class:list={[(heading || body) && 'mt-8', 'flex flex-wrap items-center justify-center gap-4']} data-sb-field-path=".cta">
-                {cta.map((item, index) => (
-                    <Action
-                        action={item}
-                        class:list={[item._type === 'actionLink' && 'font-bold underline hover:no-underline']}
-                        data-sb-field-path={`.${index}`}
-                    />
-                ))}
-            </div>
-        )
-    }
-</Section>
